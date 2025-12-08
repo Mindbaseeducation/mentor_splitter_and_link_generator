@@ -1,8 +1,5 @@
 streamlit
 openpyxl
-zipfile
-copy
 xlsxwriter
-io
 pandas
 et-xmlfile
