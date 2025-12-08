@@ -5,5 +5,4 @@ copy
 xlsxwriter
 io
 pandas
-pygments
-rich
+et-xmlfile
