@@ -196,7 +196,7 @@ if uploaded_file:
         st.error(f"Error while preparing formatted file: {e}")
 
     st.write("---")
-    st.write("### 📦 Download ZIP (All Mentors — With Formatting)")
+    st.write("### 📦 Download ZIP (All Mentors)")
 
     zip_buffer = BytesIO()
     with zipfile.ZipFile(zip_buffer, "w") as zf:
@@ -217,4 +217,5 @@ if uploaded_file:
         file_name="Formatted_Mentor_Files.zip",
         mime="application/zip"
     )
+
 
