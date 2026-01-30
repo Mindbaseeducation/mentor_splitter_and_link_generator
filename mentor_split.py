@@ -11,7 +11,7 @@ st.title("📚 Mentor-wise Student Splitter and Link Generator")
 
 uploaded_file = st.file_uploader("Upload Excel file", type=["xlsx"])
 
-def df_to_formatted_workbook(original_wb, original_ws_name, df_filtered, id_col_name="ADEK Applicant ID"):
+def df_to_formatted_workbook(original_wb, original_ws_name, df_filtered, id_col_name="Registration Number"):
     """
     Create a new workbook and copy styles/hyperlinks from the original workbook
     by looking up the original row for each student using the id_col_name.
@@ -183,7 +183,7 @@ if uploaded_file:
 
     # prepare single mentor workbook and download
     try:
-        mentor_wb = df_to_formatted_workbook(original_wb, sheet_name, final_df, id_col_name="ADEK Applicant ID")
+        mentor_wb = df_to_formatted_workbook(original_wb, sheet_name, final_df, id_col_name="Registration Number")
         excel_buffer = BytesIO()
         mentor_wb.save(excel_buffer)
         st.download_button(
@@ -203,7 +203,7 @@ if uploaded_file:
         for mentor in mentors:
             m_df = filtered_df[filtered_df["Current Mentor"] == mentor]
             try:
-                wb = df_to_formatted_workbook(original_wb, sheet_name, m_df, id_col_name="ADEK Applicant ID")
+                wb = df_to_formatted_workbook(original_wb, sheet_name, m_df, id_col_name="Registration Number")
                 mb = BytesIO()
                 wb.save(mb)
                 zf.writestr(f"{mentor} February 2026 Student List.xlsx", mb.getvalue())
@@ -217,6 +217,7 @@ if uploaded_file:
         file_name="Formatted_Mentor_Files.zip",
         mime="application/zip"
     )
+
 
 
 
