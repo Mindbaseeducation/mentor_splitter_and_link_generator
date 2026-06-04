@@ -154,8 +154,8 @@ if uploaded_file:
     # read with pandas for filtering UI convenience
     df = pd.read_excel(uploaded_file)
 
-    if "Current Mentor" not in df.columns or "Team Lead" not in df.columns:
-        st.error("❌ Required columns missing! Make sure 'Current Mentor' and 'Team Lead' exist.")
+    if "Mentor" not in df.columns or "Regional Managers" not in df.columns:
+        st.error("❌ Required columns missing! Make sure 'Mentor' and 'Regional Managers' exist.")
         st.stop()
 
     st.success("✅ File uploaded successfully!")
@@ -165,18 +165,18 @@ if uploaded_file:
     sheet_name = original_wb.sheetnames[0]
 
     # UI dropdowns
-    team_leads = ["All"] + sorted(df["Team Lead"].dropna().unique())
-    selected_team_lead = st.selectbox("Select Team Lead", team_leads)
+    team_leads = ["All"] + sorted(df["Regional Managers"].dropna().unique())
+    selected_team_lead = st.selectbox("Select Regional Managers", team_leads)
 
     if selected_team_lead != "All":
-        filtered_df = df[df["Team Lead"] == selected_team_lead]
+        filtered_df = df[df["Regional Managers"] == selected_team_lead]
     else:
         filtered_df = df.copy()
 
-    mentors = sorted(filtered_df["Current Mentor"].dropna().unique())
+    mentors = sorted(filtered_df["Mentor"].dropna().unique())
     selected_mentor = st.selectbox("Select Mentor", mentors)
 
-    final_df = filtered_df[filtered_df["Current Mentor"] == selected_mentor]
+    final_df = filtered_df[filtered_df["Mentor"] == selected_mentor]
 
     st.write(f"### Students under **{selected_mentor}** ({len(final_df)} students)")
     st.dataframe(final_df, use_container_width=True)
@@ -201,7 +201,7 @@ if uploaded_file:
     zip_buffer = BytesIO()
     with zipfile.ZipFile(zip_buffer, "w") as zf:
         for mentor in mentors:
-            m_df = filtered_df[filtered_df["Current Mentor"] == mentor]
+            m_df = filtered_df[filtered_df["Mentor"] == mentor]
             try:
                 wb = df_to_formatted_workbook(original_wb, sheet_name, m_df, id_col_name="Registration Number")
                 mb = BytesIO()
