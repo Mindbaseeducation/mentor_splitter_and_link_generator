@@ -206,7 +206,7 @@ if uploaded_file:
                 wb = df_to_formatted_workbook(original_wb, sheet_name, m_df, id_col_name="Registeration Number")
                 mb = BytesIO()
                 wb.save(mb)
-                zf.writestr(f"{mentor} June 2026 Student List.xlsx", mb.getvalue())
+                zf.writestr(f"{mentor} July 2026 Student List.xlsx", mb.getvalue())
             except Exception as e:
                 # write a small error text file so you know which mentor failed
                 zf.writestr(f"{mentor}_ERROR.txt", f"Failed to build file for {mentor}: {e}")
