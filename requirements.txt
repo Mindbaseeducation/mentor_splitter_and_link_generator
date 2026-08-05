@@ -3,3 +3,4 @@ openpyxl
 xlsxwriter
 pandas
 et-xmlfile
+starlette<1.4
